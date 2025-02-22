@@ -1,0 +1,10 @@
+# Import your libraries
+import pandas as pd
+
+# Start writing code
+# fb_active_users.head()
+us_users=fb_active_users[fb_active_users['country']=="USA"]
+status_counts=us_users.groupby("status")["user_id"].count()
+active_users_count=status_counts.loc["open"]
+total_users_count=status_counts.sum()
+share_of_active_user=active_users_count/total_users_count
