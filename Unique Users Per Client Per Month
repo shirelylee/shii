@@ -1,0 +1,11 @@
+# Import your libraries
+import pandas as pd
+
+# Start writing code
+# fact_events.head()
+result=(fact_events.groupby(
+    [fact_events["client_id"],fact_events["time_id"].dt.month]
+    )["user_id"]
+    .nunique()
+    .reset_index()
+    )
