@@ -1,0 +1,8 @@
+# Import your libraries
+import pandas as pd
+
+# Start writing code
+# sat_scores.head()
+sat_median=sat_scores["sat_writing"].median()
+result=sat_scores[sat_scores["sat_writing"]==sat_median]
+result=result["student_id"]
