@@ -1,0 +1,11 @@
+# Import your libraries
+import pandas as pd
+
+# Start writing code
+# user_flags.head()
+user_flags=user_flags[~user_flags["flag_id"].isna()]
+user_flags["unique_key"]=(
+    user_flags["user_firstname"].astype(str)+"_"+user_flags["user_lastname"].astype(str)
+    )
+ 
+user_flags.groupby("video_id")["unique_key"].nunique().reset_index()
