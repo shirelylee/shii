@@ -1,0 +1,45 @@
+Which user flagged the most distinct videos that ended up approved by YouTube? Output, in one column, their full name or names in case of a tie. In the user's full name, include a space between the first and the last name.
+Hint #1
+To find the user who flagged the most distinct videos that were approved by YouTube, we need to perform several steps. First, we need to merge the user_flags and flag_review dataframes using the flag_id column. Then, we filter the merged dataframe to only include rows where the reviewed_outcome is "approved". Next, we create a new column called "username" by combining the user_firstname and user_lastname columns. Finally, we group the dataframe by the username column and count the number of unique video_ids for each user.
+
+Hint #2
+Keep going! Now let's dive into the first part of the solution. We can start by merging the user_flags and flag_review dataframes using the merge() function. Set the "right" parameter to flag_review, the "how" parameter to "inner", and the "on" parameter to "flag_id". Assign the result to a variable called "result".
+
+result = user_flags.merge(
+    right=flag_review, how="inner", on="flag_id"
+)
+Hint #3
+Well done! You're on the right track! Now let's continue with the remaining part of the solution. We need to filter the "result" dataframe to only include rows where the reviewed_outcome is "approved". Then, we create a new column called "username" by concatenating the user_firstname and user_lastname columns. After that, we group the dataframe by the "username" column and count the number of unique video_ids for each user. Finally, we reset the index of the resulting dataframe.
+
+result = result[result["reviewed_outcome"].str.lower() == "approved"]
+result["username"] = (
+    result["user_firstname"] + " " + result["user_lastname"]
+)
+result = (
+    result.groupby(by="username")["video_id"].nunique().reset_index()
+)
+result["rank"] = result["video_id"].rank(
+    method="dense", ascending=False
+)
+result = result[result["rank"] == 1]["username"]
+
+# Import your libraries
+import pandas as pd
+
+# Start writing code
+# user_flags.head()
+result=user_flags.merge(
+    right=flag_review,how="inner",on="flag_id"
+    )
+result=result[result["reviewed_outcome"].str.lower()=="approved"]
+result["username"]=(result["user_firstname"]+" "+result["user_lastname"])
+
+result=(
+    result.groupby("username")["video_id"].nunique().reset_index()
+    )   
+    
+result["rank"]=(
+    result["video_id"].rank(method="dense",ascending=False)
+    )
+    
+result=result[result["rank"]==1]["username"]
