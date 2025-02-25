@@ -1,0 +1,20 @@
+import matplotlib.pyplot as plt
+categories=['A','B','C','D']
+values=[15,25,30,20]
+plt.figure(figsize=(6,4))
+bars=plt.bar(categories,values,color='green',label='Values')
+for bar in bars: 
+    height=bar.get_height()
+    plt.text(
+            bar.get_x()+bar.get_width()/2,
+            height,
+            f'{height}',
+            ha='center',
+            va='bottom'
+        )
+plt.title('Bar Chart Example')
+plt.xlabel('Category')
+plt.ylabel('Value')
+plt.ylim(1,40)
+plt.legend()
+plt.show()
