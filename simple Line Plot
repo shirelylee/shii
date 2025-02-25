@@ -1,0 +1,11 @@
+import matplotlib.pyplot as plt
+x=[1,2,3,4,5]
+y=[10,20,25,30,40]
+plt.figure(figsize=(6,4))
+plt.plot(x,y,marker='o',linestyle='-',color='b',label='Data Line')
+plt.title('simple Line Plot')
+plt.xlabel('X Axis')
+plt.ylabel('Y Axis')
+plt.grid(True)
+plt.legend()
+plt.show()
