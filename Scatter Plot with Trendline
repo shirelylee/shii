@@ -1,0 +1,32 @@
+import matplotlib.pyplot as plt
+import numpy as np
+
+# 数据
+x = [1, 2, 3, 4, 5]
+y = [2, 3, 5, 7, 11]
+
+# 创建画布和子图
+plt.figure(figsize=(6, 4))
+
+# 绘制散点图
+plt.scatter(x, y, color='red', label='Data Points')
+
+# 计算趋势线
+z = np.polyfit(x, y, 1)  # 线性拟合
+p = np.poly1d(z)  # 生成趋势线函数
+plt.plot(x, p(x), linestyle='--', color='blue', label='Trendline')
+
+# 添加标题和标签
+plt.title('Scatter Plot with Trendline')
+plt.xlabel('X Values')
+plt.ylabel('Y Values')
+
+# 显示趋势线方程
+equation = f'Trendline: y = {z[0]:.2f}x + {z[1]:.2f}'
+plt.text(1, 10, equation, fontsize=10, color='blue')
+
+# 显示图例
+plt.legend()
+
+# 显示图表
+plt.show()
